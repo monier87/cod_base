@@ -5,8 +5,15 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { AuthResponse, AuthResponseError } from "../types/types";
 import "./login.css"; // Import the CSS file
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileAlt, faArchive, faFolder } from "@fortawesome/free-solid-svg-icons";
-import companyLogo from '../../public/LOGO.jpg'
+import {
+  faFileAlt,
+  faArchive,
+  faFolder,
+  faUser,
+  faKey,
+  faEnvelope,
+} from "@fortawesome/free-solid-svg-icons";
+import companyLogo from '../../public/LOGO.jpg';
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -59,33 +66,49 @@ export default function Login() {
 
   return (
     <DefaultLayout>
-      <form onSubmit={handleSubmit} className="form">
-        <div className="company-logo">
-          <img src={companyLogo} alt="LOGO" />
-        </div>
-        <h1 className="titulo-verde">Sistema de Gestión Archivística</h1>
-        {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
-        <label>Usuario</label>
-        <input
-          name="username"
-          type="text"
-          onChange={handleChange}
-          value={username}
-        />
-        <label>Contraseña</label>
-        <input
-          type="password"
-          name="password"
-          onChange={handleChange}
-          value={password}
-        />
-        <button className="btn-entrar">Entrar</button>
-        <div className="document-management-icons">
-          <FontAwesomeIcon icon={faFileAlt} />
-          <FontAwesomeIcon icon={faArchive} />
-          <FontAwesomeIcon icon={faFolder} />
-        </div>
-      </form>
+      <div className="login-container">
+        <form onSubmit={handleSubmit} className="form">
+          <div className="company-logo">
+            <img src={companyLogo} alt="LOGO" />
+          </div>
+          <h1 className="titulo-verde">Sistema de Gestión Archivística</h1>
+          {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
+          <div className="form-group">
+            <label className="form-label">
+              <FontAwesomeIcon icon={faUser} /> Usuario
+            </label>
+            <input
+              name="username"
+              type="text"
+              onChange={handleChange}
+              value={username}
+              className="form-input"
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-label">
+              <FontAwesomeIcon icon={faKey} /> Contraseña
+            </label>
+            <input
+              type="password"
+              name="password"
+              onChange={handleChange}
+              value={password}
+              className="form-input"
+            />
+          </div>
+          <button className="btn-entrar">Entrar</button>
+          <div className="contact-admin">
+            <FontAwesomeIcon icon={faEnvelope} className="contact-icon" />
+            <p className="contact-text">Contactar con el Administrador</p>
+          </div>
+          <div className="document-management-icons">
+            <FontAwesomeIcon icon={faFileAlt} />
+            <FontAwesomeIcon icon={faArchive} />
+            <FontAwesomeIcon icon={faFolder} />
+          </div>
+        </form>
+      </div>
     </DefaultLayout>
   );
 }
